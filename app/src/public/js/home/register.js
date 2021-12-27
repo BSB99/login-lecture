@@ -1,18 +1,22 @@
 "use strict";
 
 const id = document.querySelector("#id");
+const name = document.querySelector("#name");
 const psword = document.querySelector("#psword");
-const loginBtn = document.querySelector("#button");
+const cofirmPsword = document.querySelector("#cofirm-psword");
+const registerBtn = document.querySelector("#button");
 
-loginBtn.addEventListener("click", login);
+registerBtn.addEventListener("click", register);
 
-function login() {
+function register() {
   const req = {
     id: id.value,
+    name: name.value,
     psword: psword.value,
+    cofirmPsword: cofirmPsword.value,
   };
-
-  fetch("/login", {
+  console.log(req);
+  fetch("/register", {
     method: "POST",
     headers: {
       "content-Type": "application/json",
@@ -22,7 +26,7 @@ function login() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        location.href = "/";
+        location.href = "/login";
       } else {
         alert(res.msg);
       }
