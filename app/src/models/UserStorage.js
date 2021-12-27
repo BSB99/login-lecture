@@ -1,7 +1,9 @@
+"use strict";
+
 class UserStorage {
   static #users = {
     id: ["가가", "나나", "다다"],
-    psword: ["1234", "1234", "123456"],
+    psword: ["1234", "12345", "123456"],
   };
 
   static getUsers(...fields) {
@@ -13,6 +15,19 @@ class UserStorage {
       return newUsers;
     }, {});
     return newUsers;
+  }
+
+  static getUserInfo(id) {
+    const users = this.#users;
+    const idx = users.id.indexOf(id);
+    const userInfo = Object.keys(users).reduce((newUser, info) => {
+      newUser[info] = users[info][idx];
+      return newUser;
+    }, {});
+
+    // console.log("userInfo : ", userInfo);
+
+    return userInfo;
   }
 }
 
